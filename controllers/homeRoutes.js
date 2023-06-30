@@ -44,7 +44,7 @@ router.get('/signup', async (req, res) => {
     res.render('signup');
 });
 
-router.get('post/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try{
         const postData = await Posts.findByPk({
             where: {
