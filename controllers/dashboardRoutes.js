@@ -35,37 +35,37 @@ router.get('/', auth, async (req, res) => {
     };
 });
 
-router.get('/edit/:id', auth, async (req, res) => {
-    try{
-        const postData = await Posts.findByPk({
-            where: {
-                id: req.params.id
-            },
-            attributes: ['id',
-                'title',
-                'content',
-                'created_at'
-            ],
-            include: [{
-                    model: User,
-                    attributes: ['username']
-                },
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                }
-            ]
-        })
-        const newPostData = postData.map(post => post.get ({ plain:true }));
-        res.render('edit', {newPostData});
-    } catch (error) {
-        res.status(500).json(error);
-    };
-});
+// router.get('/edit/:id', auth, async (req, res) => {
+//     try{
+//         const postData = await Posts.findByPk({
+//             where: {
+//                 id: req.params.id
+//             },
+//             attributes: ['id',
+//                 'title',
+//                 'content',
+//                 'created_at'
+//             ],
+//             include: [{
+//                     model: User,
+//                     attributes: ['username']
+//                 },
+//                 {
+//                     model: Comment,
+//                     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+//                     include: {
+//                         model: User,
+//                         attributes: ['username']
+//                     }
+//                 }
+//             ]
+//         })
+//         const newPostData = postData.map(post => post.get ({ plain:true }));
+//         res.render('edit', {newPostData});
+//     } catch (error) {
+//         res.status(500).json(error);
+//     };
+// });
 
 router.get('/new', (req, res) => {
     res.render('new-post');
