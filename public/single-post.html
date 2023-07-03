@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tech Word</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+  <div class="container .col-12">
+    <header id="home">
+        <h1 class="">The Tech Word</h1>
+        <nav class="navbar">
+            {{#if loggedIn}}
+            <a href="/" class="navbar-item">homepage</a>
+            <a href="/dashboard" class="navbar-item">dashboard</a>
+            <a href="/dashboard/create/" class="navbar-item">create post</a>
+            <button id="logout" class="button logout">logout</button>
+            {{else}}
+            <a href="/" class="navbar-item pt-1">homepage</a>
+            <a href="/login" class="btn login">login</a>
+            {{/if}}
+        </nav>
+    </header>
+
+    <main class="container">
+            <!-- {{{ body }}} -->
+            <div class="row mb-1">
+                                 
+                   <!-- displaying articles -->
+                  {{> post-info post}}
+                  
+                  <!-- displaying form and comments-->
+                  <!-- only display if logged in -->
+                  {{#if loggedIn}}
+                  <form class="comment-form">
+                    <div class="mb-3">
+                      <textarea class="form-control" name="comment-body"></textarea>
+                    </div>
+                  
+                    <div class="mb-3">
+                      <button class="btn comment-button" type="submit">Add Comment</button>
+                    </div>
+                    
+                  </form>
+                  {{/if}}
+                  
+                  {{> comments post.comments}}
+
+                    
+            </div>
+    </main>
+
+<footer class="footer rows footer-margin">
+        <div class="row-is-full content has-text-centered">
+            <p>
+            <a href="#home">Back to Top</a>
+            </p>
+        </div>
+      <div class="row-is-full content has-text-centered">
+    <p>
+      The Tech Word by <a href="https://github.com/leonhsu95"> Leon Hsu</a>
+    </p>
+  </div>
+    </footer>
+  </div>
+
+{{#if loggedIn}}
+<script src="js/comment.js"></script>
+{{/if}}
+</body>
+
+</html>
