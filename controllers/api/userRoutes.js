@@ -16,44 +16,44 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const userData = await User.findOne({
-      attributes: { exclude: ['password'] },
-      where: {
-        id: req.params.id,
-      },
-      include: [
-        {
-          model: Posts,
-          attributes: ['id', 'title', 'content', 'created_at'],
-        },
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'created_at'],
-          include: {
-            model: Posts,
-            attributes: ['title'],
-          },
-        },
-        {
-          model: Posts,
-          attributes: ['title'],
-        },
-      ],
-    });
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const userData = await User.findOne({
+//       attributes: { exclude: ['password'] },
+//       where: {
+//         id: req.params.id,
+//       },
+//       include: [
+//         {
+//           model: Posts,
+//           attributes: ['id', 'title', 'content', 'created_at'],
+//         },
+//         {
+//           model: Comment,
+//           attributes: ['id', 'comment_text', 'created_at'],
+//           include: {
+//             model: Posts,
+//             attributes: ['title'],
+//           },
+//         },
+//         {
+//           model: Posts,
+//           attributes: ['title'],
+//         },
+//       ],
+//     });
 
-    if (!userData) {
-      res.status(404).json({ message: 'No user found with this id' });
-      return;
-    }
+//     if (!userData) {
+//       res.status(404).json({ message: 'No user found with this id' });
+//       return;
+//     }
 
-    res.json(userData);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+//     res.json(userData);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 router.post('/login', async (req, res) => { // in insomnia you don't need to add an id because it will automatically generate because it is getting the data from the users
   try {
